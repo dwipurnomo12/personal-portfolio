@@ -19,7 +19,7 @@
                             functionality.</p>
 
                         <div class="custom-btn-group mt-4">
-                            <a href="#" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> About
+                            <a href="#about" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> About
                                 Me</a>
                         </div>
                     </div>
