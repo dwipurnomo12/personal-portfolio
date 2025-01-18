@@ -10,13 +10,10 @@
                         <small class="small-text">Welcome to <span class="mobile-block">my portfolio
                                 website!</span></small>
                         <h1 class="animated animated-text">
-                            <span class="mr-2">I'm Dwi Purnomo</span>
+                            <span class="mr-2">{{ $homeSection->title }}</span>
                         </h1>
 
-                        <p>A programmer with a passion for web programming, committed to creating innovative and
-                            user-friendly digital solutions. With expertise in web technology, I am ready to help you
-                            turn your ideas into reality through responsive design, high performance, and maximum
-                            functionality.</p>
+                        <p>{!! $homeSection->short_description !!}</p>
 
                         <div class="custom-btn-group mt-4">
                             <a href="#about" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> About
@@ -27,7 +24,7 @@
 
                 <div class="col-lg-5 col-md-12 col-12">
                     <div class="about-image svg">
-                        <img src="/assets/images/undraw/undraw_slider_8svk.svg" class="img-fluid" alt="svg image">
+                        <img src="{{ asset('storage/' . $homeSection->hero_image) }}" class="img-fluid" alt="svg image">
                     </div>
                 </div>
 
@@ -40,7 +37,7 @@
             <div class="row">
                 <div class="col-lg-5 col-md-12 col-12">
                     <div class="about-image svg">
-                        <img src="/assets/images/dwi_purnomo.png" class="img-fluid" alt="svg image">
+                        <img src="{{ asset('storage/' . $aboutSection->about_image) }}" class="img-fluid" alt="svg image">
                     </div>
                 </div>
                 <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
@@ -49,19 +46,11 @@
                             <span class="mr-2">About Me</span>
                         </h1>
 
-                        <p>My name is Dwi Purnomo, a Bachelor of Information Technology graduate from Muhammadiyah
-                            University of Purworejo. I have a great interest in the world of technology, especially in
-                            web
-                            development. So far, I have developed several websites designed to meet user needs with a
-                            focus on responsive design, performance, and optimal user experience.
-
-                            I always try to continue learning and following the latest technological developments in
-                            order to provide the best solutions in every project I work on. With a combination of
-                            academic knowledge and practical experience, I am ready to help make your digital ideas a
-                            reality.</p>
+                        <p>{!! $aboutSection->description !!}</p>
 
                         <div class="custom-btn-group mt-4">
-                            <a href="#" class="btn mr-lg-2 custom-btn"><i class='uil uil-file-alt'></i> Download
+                            <a href="{{ asset('storage/' . $aboutSection->cv) }}" class="btn mr-lg-2 custom-btn"><i
+                                    class='uil uil-file-alt'></i> Download
                                 Resume</a>
                             <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Send Message</a>
                         </div>
@@ -85,92 +74,22 @@
 
                     <div class="portfolio mt-5">
                         <div class="row">
-                            <div class="col-md-4 my-4">
-                                <div class="item">
-                                    <h5>Sistem Informasi Pembayaran Air Pamsimas </h5>
-                                    <div class="project-info">
-                                        <img src="/assets/images/project/project-image01.png" class="img-fluid"
-                                            alt="project image">
-                                        <div class="hover-buttons">
-                                            <a href="#" class="btn mr-lg-2 custom-btn">Detail</a>
-                                            <a href="#contact"
-                                                class="btn custom-btn custom-btn-bg custom-btn-link">Preview</a>
+                            @foreach ($projects as $project)
+                                <div class="col-md-4 my-4">
+                                    <div class="item">
+                                        <h5>{{ $project->project_name }} </h5>
+                                        <div class="project-info">
+                                            <img src="{{ asset('storage/' . $project->featured_image) }}" class="img-fluid"
+                                                alt="project image">
+                                            <div class="hover-buttons">
+                                                <a href="#" class="btn mr-lg-2 custom-btn">Detail</a>
+                                                <a href="{{ $project->url_preview }}"
+                                                    class="btn custom-btn custom-btn-bg custom-btn-link">Preview</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 my-4">
-                                <div class="item">
-                                    <h5>Sistem Informasi Pembayaran SPP Terintegrasi Payment Gateway</h5>
-                                    <div class="project-info">
-                                        <img src="/assets/images/project/project-image01.png" class="img-fluid"
-                                            alt="project image">
-                                        <div class="hover-buttons">
-                                            <a href="#" class="btn mr-lg-2 custom-btn">Detail</a>
-                                            <a href="#contact"
-                                                class="btn custom-btn custom-btn-bg custom-btn-link">Preview</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-4">
-                                <div class="item">
-                                    <h5>Sistem Informasi Pemenangan Pemilu</h5>
-                                    <div class="project-info">
-                                        <img src="/assets/images/project/project-image01.png" class="img-fluid"
-                                            alt="project image">
-                                        <div class="hover-buttons">
-                                            <a href="#" class="btn mr-lg-2 custom-btn">Detail</a>
-                                            <a href="#contact"
-                                                class="btn custom-btn custom-btn-bg custom-btn-link">Preview</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 my-4">
-                                <div class="item">
-                                    <h5>Sistem Informasi Pembayaran Air Pamsimas </h5>
-                                    <div class="project-info">
-                                        <img src="/assets/images/project/project-image01.png" class="img-fluid"
-                                            alt="project image">
-                                        <div class="hover-buttons">
-                                            <a href="#" class="btn mr-lg-2 custom-btn">Detail</a>
-                                            <a href="#contact"
-                                                class="btn custom-btn custom-btn-bg custom-btn-link">Preview</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-4">
-                                <div class="item">
-                                    <h5>Sistem Informasi Pembayaran SPP Terintegrasi Payment Gateway</h5>
-                                    <div class="project-info">
-                                        <img src="/assets/images/project/project-image01.png" class="img-fluid"
-                                            alt="project image">
-                                        <div class="hover-buttons">
-                                            <a href="#" class="btn mr-lg-2 custom-btn">Detail</a>
-                                            <a href="#contact"
-                                                class="btn custom-btn custom-btn-bg custom-btn-link">Preview</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 my-4">
-                                <div class="item">
-                                    <h5>Sistem Informasi Pemenangan Pemilu</h5>
-                                    <div class="project-info">
-                                        <img src="/assets/images/project/project-image01.png" class="img-fluid"
-                                            alt="project image">
-                                        <div class="hover-buttons">
-                                            <a href="#" class="btn mr-lg-2 custom-btn">Detail</a>
-                                            <a href="#contact"
-                                                class="btn custom-btn custom-btn-bg custom-btn-link">Preview</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="text-center">
@@ -192,23 +111,27 @@
                         <h2>The Programming Language I Use to Develop Web Apps</h2>
                     </div>
                     <div class="row my-4">
-                        <div class="col-md-6 my-2">
-                            <div class="card d-flex align-items-center p-3"
-                                style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-                                <div class="row g-0 w-100">
-                                    <div class="col-4 icon-skills text-center my-auto">
-                                        <img src="/assets/images/skills/bootstrap-fill-svgrepo-com.svg" alt="Bootstrap"
-                                            width="100px" height="100px" class="img-fluid">
-                                    </div>
-                                    <div class="col-8">
-                                        <div class="card-body">
-                                            <h4>Bootstrap</h4>
-                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                        @foreach ($skills as $skill)
+                            <div class="col-md-6 my-2">
+                                <div class="card d-flex align-items-center p-3"
+                                    style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                                    <div class="row g-0 w-100">
+                                        <div class="col-4 icon-skills text-center my-auto">
+                                            <img src="{{ asset('storage/' . $skill->skill_logo) }}"
+                                                alt="{{ $skill->skill_name }}" width="100px" height="100px"
+                                                class="img-fluid">
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body">
+                                                <h4>{{ $skill->skill_name }}</h4>
+                                                <p>{!! $skill->skill_description !!}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
+
                         <div class="col-md-6 my-2">
                             <div class="card d-flex align-items-center p-3"
                                 style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
@@ -271,12 +194,14 @@
                         </div>
                         <div class="swiper mySwiper">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="/assets/images/tools/visual-studio-code-svgrepo-com.svg"
-                                        alt="Visual Studio Code" width="100" height="100"
-                                        class="d-block mx-auto img-icon icon-slide">
-                                    <h4 class="text-center">Visual Studio Code</h4>
-                                </div>
+                                @foreach ($tools as $tool)
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset('storage/' . $tool->tool_image) }}"
+                                            alt="{{ $tool->tool_name }}" width="100" height="100"
+                                            class="d-block mx-auto img-icon icon-slide">
+                                        <h4 class="text-center">{{ $tool->tool_name }}</h4>
+                                    </div>
+                                @endforeach
                                 <div class="swiper-slide">
                                     <img src="/assets/images/tools/visual-studio-svgrepo-com.svg"
                                         alt="Microsoft Visual Studio" width="100" height="100"

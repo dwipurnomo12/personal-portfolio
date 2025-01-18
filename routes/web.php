@@ -5,12 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminHomeSectionController;
 use App\Http\Controllers\AdminAboutSectionController;
+use App\Http\Controllers\AdminProjectsSectionController;
+use App\Http\Controllers\AdminSkillSectionController;
+use App\Http\Controllers\AdminToolsSectionController;
+use App\Http\Controllers\FrontendCoontroller;
 
 
-Route::get('/', function () {
-    return view('index');
-});
-
+Route::get('/', [FrontendCoontroller::class, 'index']);
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
@@ -22,5 +23,14 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/about-section', [AdminAboutSectionController::class, 'index']);
         Route::put('/about-section/{id}', [AdminAboutSectionController::class, 'update']);
+
+        Route::get('/skills-section/get-data', [AdminSkillSectionController::class, 'getSkills']);
+        Route::resource('/skills-section', AdminSkillSectionController::class);
+
+        Route::get('/tools-section/get-data', [AdminToolsSectionController::class, 'getTools']);
+        Route::resource('/tools-section', AdminToolsSectionController::class);
+
+        Route::get('/projects-section/get-data', [AdminProjectsSectionController::class, 'getProjects']);
+        Route::resource('/projects-section', AdminProjectsSectionController::class);
     });
 });
