@@ -305,6 +305,10 @@ b, strong {
   background: #0c0c0d;
 }
 
+.dark-mode .modal-content{
+  background: #0c0c0d;
+}
+
 .dark-mode .card{
   background: #0c0c0d;
 }

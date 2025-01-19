@@ -34,7 +34,7 @@
                <span class="hide-menu">Skills</span>
            </a>
            <a class="sidebar-link" href="/admin/tools-section" aria-expanded="false">
-               <iconify-icon icon="icon-park:code-computer"></iconify-icon>
+               <iconify-icon icon="fluent:window-dev-tools-24-regular"></iconify-icon>
                <span class="hide-menu">Tools</span>
            </a>
        </li>

@@ -42,7 +42,6 @@
                                     <tr>
                                         <th style="text-align: left; padding: 12px;">Featured Image</th>
                                         <th style="text-align: left; padding: 12px;">Project Name</th>
-                                        <th style="text-align: left; padding: 12px;">Url Preview</th>
                                         <th style="text-align: left; padding: 12px;">Opsi</th>
                                     </tr>
                                 </thead>
@@ -58,6 +57,7 @@
 
 
     <script>
+        // Preview Image
         function previewImage() {
             const file = event.target.files[0];
             const preview = document.getElementById('preview');
@@ -76,6 +76,7 @@
             }
         }
 
+        // Summernote
         $(document).ready(function() {
             $('#project_description').summernote({
                 height: 300,
@@ -103,8 +104,31 @@
                     ['view', ['fullscreen', 'codeview']],
                 ]
             });
+            $('#show_project_description').summernote('disable');
         });
 
+
+        // Generate Slug
+        const title = document.querySelector('#project_name');
+        const slug = document.querySelector('#slug');
+
+        title.addEventListener('change', function() {
+            fetch('/admin/projects-section/slug?project_name=' + title.value)
+                .then(response => response.json())
+                .then(data => slug.value = data.slug)
+        });
+
+        const titleEdit = document.querySelector('#edit_project_name');
+        const slugEdit = document.querySelector('#edit_slug');
+
+        titleEdit.addEventListener('change', function() {
+            fetch('/admin/projects-section/slug?project_name=' + titleEdit.value)
+                .then(response => response.json())
+                .then(data => slugEdit.value = data.slug)
+        });
+
+
+        // Jquery Ajax
         $(document).ready(function() {
             let table = $('#table_id').DataTable();
 
@@ -120,9 +144,8 @@
                         $.each(response.data, function(key, value) {
                             let data = `
                             <tr class="data-row" id="index_${value.id}">
-                                <td><img src="/storage/${value.featured_image}" alt="project Logo" style="width: 300px; height: 175px;"></td>
+                                <td><img src="/storage/${value.featured_image}" alt="project Logo" style="width: 300px; height: 175px; border-radius:7px;"></td>
                                 <td>${value.project_name}</td>
-                                <td>${value.url_preview}</td>
                                 <td>
                                     <a href="javascript:void(0)" id="btn_show_project" data-id="${value.id}" class="btn btn-icon btn-success btn-lg mb-2"><i class="ti ti-eye"></i> </a>
                                     <a href="javascript:void(0)" id="btn_edit_project" data-id="${value.id}" class="btn btn-icon btn-warning btn-lg mb-2"><i class="ti ti-edit"></i> </a>
@@ -159,6 +182,7 @@
                 $('#featured_image').val('');
                 $('#preview').attr('src', '');
                 $('#project_name').val('');
+                $('#slug').val('');
                 $('#url_preview').val('');
                 $('#project_description').summernote('code', '');
             }
@@ -169,6 +193,7 @@
 
                 let featured_image = $('#featured_image')[0].files[0];
                 let project_name = $('#project_name').val();
+                let slug = $('#slug').val();
                 let url_preview = $('#url_preview').val();
                 let project_description = $('#project_description').val();
                 let token = $("meta[name='csrf-token']").attr("content");
@@ -176,6 +201,7 @@
                 let formData = new FormData();
                 formData.append('featured_image', featured_image);
                 formData.append('project_name', project_name);
+                formData.append('slug', slug);
                 formData.append('url_preview', url_preview);
                 formData.append('project_description', project_description);
                 formData.append('_token', token);
@@ -245,6 +271,8 @@
                         $('#show_project_description').val(response.data.project_description);
                         $('#preview_show').attr('src', '/storage/' + response.data
                             .featured_image);
+                        $('#show_project_description').summernote('code', response.data
+                            .project_description);
 
                         $('#modal_show_project').modal('show');
                     }
@@ -264,6 +292,7 @@
                     success: function(response) {
                         $('#project_id').val(response.data.id);
                         $('#edit_project_name').val(response.data.project_name);
+                        $('#edit_slug').val(response.data.slug);
                         $('#edit_url_preview').val(response.data.url_preview);
                         $('#edit_project_description').val(response.data.project_description);
                         $('#preview_edit').attr('src', '/storage/' + response.data
@@ -283,6 +312,7 @@
                 let project_id = $('#project_id').val();
                 let featured_image = $('#edit_featured_image')[0].files[0];
                 let project_name = $('#edit_project_name').val();
+                let slug = $('#edit_slug').val();
                 let url_preview = $('#edit_url_preview').val();
                 let project_description = $('#edit_project_description').val();
                 let token = $("meta[name='csrf-token']").attr("content");
@@ -290,6 +320,7 @@
                 let formData = new FormData();
                 formData.append('featured_image', featured_image);
                 formData.append('project_name', project_name);
+                formData.append('slug', slug);
                 formData.append('url_preview', url_preview);
                 formData.append('project_description', project_description);
                 formData.append('_token', token);

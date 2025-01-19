@@ -25,6 +25,10 @@
                                <div class="text-danger d-none" id="project_name_error"></div>
                            </div>
                            <div class="mb-3">
+                               <input type="hidden" class="form-control" name="slug" id="slug"
+                                   value="{{ old('slug') }}">
+                           </div>
+                           <div class="mb-3">
                                <label for="url_preview" class="form-label">URL Preview <span
                                        class="text-danger">*</span></label>
                                <input type="text" class="form-control" name="url_preview" id="url_preview"

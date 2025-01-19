@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('featured_image');
             $table->string('project_name');
+            $table->string('slug');
             $table->string('url_preview');
             $table->longText('project_description');
             $table->timestamps();

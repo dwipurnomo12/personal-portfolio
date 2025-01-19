@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -16,6 +17,9 @@
 
     <!-- MAIN STYLE -->
     <link rel="stylesheet" href="/assets/css/tooplate-style.css">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <!-- Swipper Js -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -42,6 +46,11 @@
     <script src="/assets/js/owl.carousel.min.js"></script>
     <script src="/assets/js/smoothscroll.js"></script>
     <script src="/assets/js/custom.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+    @include('sweetalert::alert')
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

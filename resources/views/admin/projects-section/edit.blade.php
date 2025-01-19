@@ -26,6 +26,10 @@
                                <div class="text-danger d-none" id="project_name_error"></div>
                            </div>
                            <div class="mb-3">
+                               <input type="hidden" class="form-control" name="slug" id="edit_slug"
+                                   value="{{ old('slug') }}">
+                           </div>
+                           <div class="mb-3">
                                <label for="url_preview" class="form-label">URL Preview <span
                                        class="text-danger">*</span></label>
                                <input type="text" class="form-control" name="url_preview" id="edit_url_preview"
@@ -41,7 +45,7 @@
 
                        </div>
                        <div class="modal-footer bg-whitesmoke br">
-                           <button type="button" class="btn btn-primary" id="store">Submit</button>
+                           <button type="button" class="btn btn-primary" id="update">Submit</button>
                        </div>
                    </form>
                </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProjectSection;
 use App\Http\Controllers\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
@@ -66,7 +67,8 @@ class AdminProjectsSectionController extends Controller
             'featured_image'        => $image,
             'project_name'          => $request->project_name,
             'url_preview'           => $request->url_preview,
-            'project_description'   => $request->project_description
+            'project_description'   => $request->project_description,
+            'slug'                  => $request->slug
         ]);
 
         return response()->json([
@@ -134,7 +136,8 @@ class AdminProjectsSectionController extends Controller
             'featured_image'        => $gambar,
             'project_name'          => $request->project_name,
             'url_preview'           => $request->url_preview,
-            'project_description'   => $request->project_description
+            'project_description'   => $request->project_description,
+            'slug'                  => $request->slug
         ]);
 
         return response()->json([
@@ -159,5 +162,23 @@ class AdminProjectsSectionController extends Controller
             'message'   => 'Data deleted successfully',
             'data'      => $project,
         ]);
+    }
+
+    /**
+     * Generate slug.
+     */
+    /**
+     * Generate slug.
+     */
+    public function slug(Request $request)
+    {
+        $projectName = $request->input('project_name');
+
+        if (!$projectName) {
+            return response()->json(['error' => 'Project name is required'], 400);
+        }
+
+        $slug = SlugService::createSlug(ProjectSection::class, 'slug', $projectName);
+        return response()->json(['slug' => $slug]);
     }
 }

@@ -8,10 +8,16 @@ use App\Http\Controllers\AdminAboutSectionController;
 use App\Http\Controllers\AdminProjectsSectionController;
 use App\Http\Controllers\AdminSkillSectionController;
 use App\Http\Controllers\AdminToolsSectionController;
-use App\Http\Controllers\FrontendCoontroller;
+use App\Http\Controllers\FrontendController;
+use App\Models\ProjectSection;
 
+Route::get('/', [FrontendController::class, 'index']);
+Route::get('/projects/{id}', function ($id) {
+    $project = ProjectSection::findOrFail($id);
+    return response()->json($project);
+});
+Route::post('/send-email', [FrontendController::class, 'sendEmail']);
 
-Route::get('/', [FrontendCoontroller::class, 'index']);
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
@@ -31,6 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('/tools-section', AdminToolsSectionController::class);
 
         Route::get('/projects-section/get-data', [AdminProjectsSectionController::class, 'getProjects']);
+        Route::get('/projects-section/slug', [AdminProjectsSectionController::class, 'slug']);
         Route::resource('/projects-section', AdminProjectsSectionController::class);
     });
 });
