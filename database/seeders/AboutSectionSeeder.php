@@ -15,7 +15,7 @@ class AboutSectionSeeder extends Seeder
     {
         AboutSection::create([
             'about_image'   => '/about-image/dwi_purnomo.png',
-            'cv'            => '/file-cv/cv.pdf',
+            'cv'            => '/file-cv/CV Dwi Purnomo.pdf',
             'description'   => 'My name is Dwi Purnomo, a Bachelor of Information Technology graduate from Muhammadiyah University of Purworejo. I have a great interest in the world of technology, especially in web development. So far, I have developed several websites designed to meet user needs with a focus on responsive design, performance, and optimal user experience. I always try to continue learning and following the latest technological developments in order to provide the best solutions in every project I work on. With a combination of academic knowledge and practical experience, I am ready to help make your digital ideas a reality.'
         ]);
     }

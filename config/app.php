@@ -123,4 +123,5 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'google_verification' => env('GOOGLE_SEARCH_CONSOLE_VERIFICATION', ''),
 ];

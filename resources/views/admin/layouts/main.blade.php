@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Matdash Free</title>
-    <link rel="shortcut icon" type="image/png" href="/admin/assets/images/logos/favicon.png" />
+    <title>Dashboard Personal Portfolio - Dwi Purnomo</title>
+    <link rel="shortcut icon" type="image/png" href="/admin/assets/images/logo.png" />
     <link rel="stylesheet" href="/admin/assets/css/styles.min.css" />
 
     <!-- Jquery CDN -->
@@ -30,7 +30,7 @@
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
                     <a href="/" class="text-nowrap logo-img">
-                        <img src="/admin/assets/images/logos/logo.svg" alt="" />
+                        <h5>PERSONAL PORTFOLIO</h5>
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>

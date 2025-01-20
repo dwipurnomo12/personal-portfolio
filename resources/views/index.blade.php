@@ -49,8 +49,8 @@
                         <p>{!! $aboutSection->description !!}</p>
 
                         <div class="custom-btn-group mt-4">
-                            <a href="{{ asset('storage/' . $aboutSection->cv) }}" class="btn mr-lg-2 custom-btn"><i
-                                    class='uil uil-file-alt'></i> Download
+                            <a href="{{ asset('storage/' . $aboutSection->cv) }}" class="btn mr-lg-2 custom-btn"
+                                target="_blank"><i class='uil uil-file-alt'></i> Download
                                 Resume</a>
                             <a href="#contact" class="btn custom-btn custom-btn-bg custom-btn-link">Send Message</a>
                         </div>
@@ -200,7 +200,7 @@
 
                 <div class="col-lg-5 mr-lg-5 col-12">
                     <div class="about-image svg">
-                        <img src="/assets/images/undraw/undraw_online-test_20lm.svg" class="img-fluid" alt="svg image">
+                        <img src="/assets/images/undraw_online-test_20lm.svg" class="img-fluid" alt="svg image">
                     </div>
                 </div>
 
@@ -269,11 +269,11 @@
                                     <img src="/storage/${data.featured_image}" class="img-fluid rounded shadow-sm mb-3" 
                                         alt="${data.project_name}">
                                 </div>
-                                <div class="col-md-8" text-justify>
-                                    <h5 style="text-align: justify;">${data.project_name}</h5>
-                                    <p class="text-muted" style="text-align: justify;">${data.project_description}</p>
-
-                                </div>
+                               <div class="col-md-8">
+                                        <div class="modal-body" style="text-align: justify;">
+                             <h5 style="text-align: justify;">${data.project_name}</h5>
+    <p>${data.project_description}</p>
+</div>
                             </div>
                         </div>
                     `);

@@ -46,11 +46,11 @@
            <span class="hide-menu">SETTINGS</span>
        </li>
        <li class="sidebar-item">
-           <a class="sidebar-link" href="/admin/profile-section" aria-expanded="false">
+           <a class="sidebar-link" href="/admin/profile" aria-expanded="false">
                <iconify-icon icon="gg:profile"></iconify-icon>
                <span class="hide-menu">Profile</span>
            </a>
-           <a class="sidebar-link" href="/admin/integrations-section" aria-expanded="false">
+           <a class="sidebar-link" href="/admin/integrations" aria-expanded="false">
                <iconify-icon icon="stash:integrations"></iconify-icon>
                <span class="hide-menu">Integrations</span>
            </a>
