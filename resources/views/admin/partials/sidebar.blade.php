@@ -25,6 +25,10 @@
                <iconify-icon icon="material-symbols:info"></iconify-icon>
                <span class="hide-menu">About</span>
            </a>
+           <a class="sidebar-link" href="/admin/experience-section" aria-expanded="false">
+               <iconify-icon icon="material-symbols:code-blocks-outline-sharp"></iconify-icon>
+               <span class="hide-menu">Experience</span>
+           </a>
            <a class="sidebar-link" href="/admin/projects-section" aria-expanded="false">
                <iconify-icon icon="eos-icons:project"></iconify-icon>
                <span class="hide-menu">Projects</span>

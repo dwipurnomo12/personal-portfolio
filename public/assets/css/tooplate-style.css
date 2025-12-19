@@ -301,6 +301,57 @@ b, strong {
 }
 
 
+.experience {
+  background: #ffffff;
+}
+.experience .exp-header {
+  letter-spacing: 0.5px;
+  color: #1f2937;
+}
+.experience .exp-card {
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.experience .exp-item {
+  position: relative;
+  padding: 18px 18px 18px 34px;
+  border-left: 2px solid rgba(31, 111, 139, 0.15);
+}
+.experience .exp-dot {
+  position: absolute;
+  left: -7px;
+  top: 28px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #1f6f8b;
+  box-shadow: 0 0 0 6px rgba(31, 111, 139, 0.12);
+}
+.experience .exp-title {
+  color: #1f2937;
+  font-weight: 700;
+}
+.experience .exp-meta {
+  color: #6b7280;
+  font-size: 0.95rem;
+}
+.experience .exp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 999px;
+  background: rgba(31, 111, 139, 0.1);
+  color: #1f6f8b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.experience .exp-summary {
+  color: #1f2937;
+  line-height: 1.7;
+  text-align: justify;
+}
+
 .dark-mode {
   background: #0c0c0d;
 }
@@ -313,12 +364,44 @@ b, strong {
   background: #0c0c0d;
 }
 
+.dark-mode .skills .card{
+  background: #14181f;
+}
 .dark-mode .icon-slide{
   background: #fff;
 }
 
 .dark-mode .icon-skills{
   background: #fff;
+}
+.dark-mode .experience {
+  background: #0c0c0d;
+}
+.dark-mode .experience .exp-header {
+  color: #ffffff;
+}
+.dark-mode .experience .exp-card {
+  background: #14181f;
+}
+.dark-mode .experience .exp-item {
+  border-left-color: rgba(124, 199, 216, 0.25);
+}
+.dark-mode .experience .exp-dot {
+  background: #7cc7d8;
+  box-shadow: 0 0 0 6px rgba(124, 199, 216, 0.12);
+}
+.dark-mode .experience .exp-title {
+  color: #e5e7eb;
+}
+.dark-mode .experience .exp-meta {
+  color: #9ca3af;
+}
+.dark-mode .experience .exp-badge {
+  background: rgba(124, 199, 216, 0.12);
+  color: #7cc7d8;
+}
+.dark-mode .experience .exp-summary {
+  color: #e5e7eb;
 }
 .dark-mode .navbar-light .navbar-nav .nav-link {
   color: rgba(255, 255, 255, 0.8);

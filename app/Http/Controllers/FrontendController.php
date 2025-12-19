@@ -8,6 +8,7 @@ use App\Models\AboutSection;
 use App\Models\SkillSection;
 use Illuminate\Http\Request;
 use App\Models\ProjectSection;
+use App\Models\ExperienceSection;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -21,12 +22,14 @@ class FrontendController extends Controller
         $skills         = SkillSection::orderBy('id', 'DESC')->get();
         $tools          = ToolSection::orderBy('id', 'DESC')->get();
         $projects       = ProjectSection::orderBy('id', 'DESC')->get();
+        $experiences    = ExperienceSection::orderBy('id', 'DESC')->get();
         return view('index', [
             'homeSection'   => $homeSection,
             'aboutSection'  => $aboutSection,
             'skills'        => $skills,
             'tools'         => $tools,
-            'projects'      => $projects
+            'projects'      => $projects,
+            'experiences'   => $experiences,
         ]);
     }
 
