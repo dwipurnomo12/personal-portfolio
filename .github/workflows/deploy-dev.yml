@@ -15,25 +15,26 @@ jobs:
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
+          ssh-private-key: ${{ secrets.VPS_SSH_KEY_DEV }}
 
-      - name: Deploy to VPS
+      - name: Deploy to DEV VPS
         run: |
           ssh -o StrictHostKeyChecking=no \
-          ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            cd ${{ secrets.VPS_PATH }}
+          ${{ secrets.VPS_USER_DEV }}@${{ secrets.VPS_HOST_DEV }} << 'EOF'
+            cd ${{ secrets.VPS_PATH_DEV }}
 
-            echo "=== DEPLOY START ==="
-            git pull origin main
+            echo "=== DEPLOY DEV START ==="
+            git fetch origin
+            git checkout dev
+            git pull origin dev
 
-            # Jika Laravel (aman walau bukan)
-            composer install --no-interaction --prefer-dist --optimize-autoloader || true
-            php artisan migrate --force || true
-            php artisan optimize:clear || true
-            php artisan optimize || true
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan migrate --force
+            php artisan optimize:clear
+            php artisan optimize
 
-            sudo systemctl reload php8.3-fpm || true
-            sudo systemctl reload nginx || true
+            sudo systemctl reload php8.3-fpm
+            sudo systemctl reload nginx
 
-            echo "=== DEPLOY DONE ==="
+            echo "=== DEPLOY DEV DONE ==="
           EOF
