@@ -15,6 +15,8 @@ use App\Http\Controllers\AdminSkillSectionController;
 use App\Http\Controllers\AdminToolsSectionController;
 use App\Http\Controllers\AdminProjectsSectionController;
 use App\Http\Controllers\AdminExperienceSectionController;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 
 Route::get('/', [FrontendController::class, 'index']);
@@ -24,6 +26,17 @@ Route::get('/projects/{id}', function ($id) {
 });
 Route::post('/send-email', [FrontendController::class, 'sendEmail']);
 Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
+Route::get('/test-analytics', function () {
+    $analytics = app('analytics');
+    return $analytics->fetchVisitorsAndPageViews(Period::days(7));
+});
+Route::get('/debug-analytics', function () {
+    return [
+        'env' => env('ANALYTICS_PROPERTY_ID'),
+        'config' => config('analytics.property_id'),
+        'config_file_exists' => file_exists(config_path('analytics.php')),
+    ];
+});
 
 
 Auth::routes();
