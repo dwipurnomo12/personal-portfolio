@@ -61,6 +61,49 @@
         </div>
     </section>
 
+    <!-- EXPERIENCE -->
+    <section class="experience py-5 my-5" id="experience">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mx-auto col-12">
+                    <div class="col-lg-8 mx-auto mb-5">
+                        <h2 class="exp-header">My Experience</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-11 my-2 mx-auto">
+                            <div class="card p-3 text-start exp-card">
+                                @foreach ($experiences as $experience)
+                                    <div class="exp-item my-5 mr-1 ml-3">
+                                        <span class="exp-dot"></span>
+                                        <div class="d-flex flex-column flex-md-row justify-content-between gap-2">
+                                            <div>
+                                                <h4 class="exp-title mb-1">
+                                                    {{ $experience->job_title }}</h4>
+                                                <div class="exp-meta">{{ $experience->company }}</div>
+                                            </div>
+                                            <div class="exp-badge">
+                                                {{ \Carbon\Carbon::parse($experience->start_date)->format('F Y') }}
+                                                -
+                                                @if ($experience->is_current)
+                                                    Present
+                                                @else
+                                                    {{ \Carbon\Carbon::parse($experience->end_date)->format('F Y') }}
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="exp-summary mt-3">
+                                            {!! $experience->summary !!}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- PROJECTS -->
     <section class="project py-5" id="project">
         <div class="container">
@@ -98,7 +141,8 @@
                                     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="dynamicModalLabel">Loading...</h5>
+                                                <h5 class="modal-title" id="dynamicModalLabel">
+                                                    Loading...</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -266,7 +310,7 @@
                         <div class="container-fluid detail-project">
                             <div class="row">
                                 <div class="col-md-4 text-center">
-                                    <img src="/storage/${data.featured_image}" class="img-fluid rounded shadow-sm mb-3" 
+                                    <img src="/storage/${data.featured_image}" class="img-fluid rounded shadow-sm mb-3"
                                         alt="${data.project_name}">
                                 </div>
                                <div class="col-md-8">
@@ -335,10 +379,17 @@
         $('#send').click(function(e) {
             e.preventDefault();
 
+            var $sendBtn = $('#send');
+            if ($sendBtn.prop('disabled')) {
+                return;
+            }
+
             let name = $('#name').val();
             let email = $('#email').val();
             let message = $('#message').val();
             let token = $("input[name='_token']").val();
+
+            $sendBtn.prop('disabled', true).val('Sending...');
 
             $.ajax({
                 url: '/send-email',
@@ -380,6 +431,9 @@
                         timer: 5000,
                         showConfirmButton: true,
                     });
+                },
+                complete: function() {
+                    $sendBtn.prop('disabled', false).val('Send Button');
                 }
             });
         });

@@ -8,6 +8,7 @@ use App\Models\AboutSection;
 use App\Models\SkillSection;
 use Illuminate\Http\Request;
 use App\Models\ProjectSection;
+use App\Models\ExperienceSection;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -21,12 +22,14 @@ class FrontendController extends Controller
         $skills         = SkillSection::orderBy('id', 'DESC')->get();
         $tools          = ToolSection::orderBy('id', 'DESC')->get();
         $projects       = ProjectSection::orderBy('id', 'DESC')->get();
+        $experiences    = ExperienceSection::orderBy('id', 'DESC')->get();
         return view('index', [
             'homeSection'   => $homeSection,
             'aboutSection'  => $aboutSection,
             'skills'        => $skills,
             'tools'         => $tools,
-            'projects'      => $projects
+            'projects'      => $projects,
+            'experiences'   => $experiences,
         ]);
     }
 
@@ -42,6 +45,15 @@ class FrontendController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $adminAddress = config('mail.to.address') ?: config('mail.from.address');
+
+        if (empty($adminAddress)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Admin email belum dikonfigurasi.',
+            ], 500);
+        }
+
         $mailData = [
             'user_name'    => $request->name,
             'user_email'   => $request->email,
@@ -49,8 +61,10 @@ class FrontendController extends Controller
         ];
 
         Mail::send('emails.contact', $mailData, function ($email) use ($request) {
-            $email->to(env('MAIL_USERNAME'))
-                ->subject('New Contact Message');
+            $email->to(config('mail.to.address') ?: config('mail.from.address'))
+                ->from(config('mail.from.address'), config('mail.from.name'))
+                ->replyTo($request->email, $request->name)
+                ->subject('New Message');
         });
 
         return response()->json([

@@ -1,19 +1,22 @@
 <?php
 
+use App\Models\ProjectSection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\SearchConsoleController;
 use App\Http\Controllers\AdminHomeSectionController;
 use App\Http\Controllers\AdminAboutSectionController;
 use App\Http\Controllers\AdminIntegrationsController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\AdminProjectsSectionController;
 use App\Http\Controllers\AdminSkillSectionController;
 use App\Http\Controllers\AdminToolsSectionController;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\SearchConsoleController;
-use App\Http\Controllers\SitemapController;
-use App\Models\ProjectSection;
+use App\Http\Controllers\AdminProjectsSectionController;
+use App\Http\Controllers\AdminExperienceSectionController;
+use Spatie\Analytics\Facades\Analytics;
+use Spatie\Analytics\Period;
 
 
 Route::get('/', [FrontendController::class, 'index']);
@@ -23,6 +26,17 @@ Route::get('/projects/{id}', function ($id) {
 });
 Route::post('/send-email', [FrontendController::class, 'sendEmail']);
 Route::get('/generate-sitemap', [SitemapController::class, 'generate']);
+Route::get('/test-analytics', function () {
+    $analytics = app('analytics');
+    return $analytics->fetchVisitorsAndPageViews(Period::days(7));
+});
+Route::get('/debug-analytics', function () {
+    return [
+        'env' => env('ANALYTICS_PROPERTY_ID'),
+        'config' => config('analytics.property_id'),
+        'config_file_exists' => file_exists(config_path('analytics.php')),
+    ];
+});
 
 
 Auth::routes();
@@ -35,6 +49,14 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::get('/about-section', [AdminAboutSectionController::class, 'index']);
         Route::put('/about-section/{id}', [AdminAboutSectionController::class, 'update']);
+
+        Route::get('/experience-section', [AdminExperienceSectionController::class, 'index']);
+        Route::get('/experience-section/get-data', [AdminExperienceSectionController::class, 'getExperiences']);
+        Route::get('/experience-section/create', [AdminExperienceSectionController::class, 'create']);
+        Route::post('/experience-section/store', [AdminExperienceSectionController::class, 'store']);
+        Route::get('/experience-section/{id}/edit', [AdminExperienceSectionController::class, 'edit']);
+        Route::put('/experience-section/{id}', [AdminExperienceSectionController::class, 'update']);
+        Route::delete('/experience-section/{id}', [AdminExperienceSectionController::class, 'destroy']);
 
         Route::get('/skills-section/get-data', [AdminSkillSectionController::class, 'getSkills']);
         Route::resource('/skills-section', AdminSkillSectionController::class);
