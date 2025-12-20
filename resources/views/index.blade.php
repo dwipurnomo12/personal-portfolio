@@ -379,10 +379,17 @@
         $('#send').click(function(e) {
             e.preventDefault();
 
+            var $sendBtn = $('#send');
+            if ($sendBtn.prop('disabled')) {
+                return;
+            }
+
             let name = $('#name').val();
             let email = $('#email').val();
             let message = $('#message').val();
             let token = $("input[name='_token']").val();
+
+            $sendBtn.prop('disabled', true).val('Sending...');
 
             $.ajax({
                 url: '/send-email',
@@ -424,6 +431,9 @@
                         timer: 5000,
                         showConfirmButton: true,
                     });
+                },
+                complete: function() {
+                    $sendBtn.prop('disabled', false).val('Send Button');
                 }
             });
         });

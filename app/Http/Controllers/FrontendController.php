@@ -45,6 +45,15 @@ class FrontendController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $adminAddress = config('mail.to.address') ?: config('mail.from.address');
+
+        if (empty($adminAddress)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Admin email belum dikonfigurasi.',
+            ], 500);
+        }
+
         $mailData = [
             'user_name'    => $request->name,
             'user_email'   => $request->email,
@@ -52,8 +61,10 @@ class FrontendController extends Controller
         ];
 
         Mail::send('emails.contact', $mailData, function ($email) use ($request) {
-            $email->to(env('MAIL_USERNAME'))
-                ->subject('New Contact Message');
+            $email->to(config('mail.to.address') ?: config('mail.from.address'))
+                ->from(config('mail.from.address'), config('mail.from.name'))
+                ->replyTo($request->email, $request->name)
+                ->subject('New Message');
         });
 
         return response()->json([
