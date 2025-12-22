@@ -23,7 +23,6 @@ jobs:
           ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
 
             set -e
-
             cd /www/wwwroot/dwi-purnomo.my.id
 
             echo "=== DEPLOY START ==="
@@ -34,10 +33,21 @@ jobs:
             echo "Current commit:"
             git log --oneline -1
 
-            composer install --no-interaction --prefer-dist --optimize-autoloader
+            # 🔥 INSTALL DEPENDENCY TANPA JALANKAN ARTISAN
+            composer install \
+              --no-interaction \
+              --prefer-dist \
+              --optimize-autoloader \
+              --no-scripts
 
-            php artisan migrate --force
-            php artisan optimize:clear
+            # 🔐 FIX PERMISSION (WAJIB)
+            chown -R www:www storage bootstrap
+            chmod -R 775 storage bootstrap
+
+            # ✅ JALANKAN ARTISAN SEBAGAI www
+            sudo -u www /www/server/php/83/bin/php artisan package:discover
+            sudo -u www /www/server/php/83/bin/php artisan migrate --force
+            sudo -u www /www/server/php/83/bin/php artisan optimize:clear
 
             sudo systemctl reload php8.3-fpm
             sudo systemctl reload nginx
