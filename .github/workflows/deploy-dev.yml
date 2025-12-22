@@ -33,7 +33,6 @@ jobs:
             php artisan optimize:clear
             php artisan optimize
 
-            sudo systemctl reload php8.3-fpm
             sudo systemctl reload nginx
 
             echo "=== DEPLOY DEV DONE ==="
