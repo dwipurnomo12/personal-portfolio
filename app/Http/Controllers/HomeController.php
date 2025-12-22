@@ -40,10 +40,20 @@ class HomeController extends Controller
             $visitors = collect(array_fill(0, 14, 0));
             $pageViews = collect(array_fill(0, 14, 0));
         } else {
-            $labels = $analyticsData->map(
-                fn($row) =>
-                $row['date']->format('M d')
-            )->values();
+            $labels = $analyticsData->values()->map(function ($row, $index) use ($analyticsData) {
+                $date = data_get($row, 'date');
+                if ($date instanceof \Carbon\CarbonInterface) {
+                    return $date->format('M d');
+                }
+
+                if (is_string($date) && $date !== '') {
+                    return \Carbon\Carbon::parse($date)->format('M d');
+                }
+
+                // Fallback to a computed label when the date key is missing.
+                $daysBack = $analyticsData->count() - 1 - $index;
+                return now()->subDays($daysBack)->format('M d');
+            })->values();
 
             $visitors = $analyticsData->pluck('visitors')->values();
             $pageViews = $analyticsData->pluck('pageViews')->values();
