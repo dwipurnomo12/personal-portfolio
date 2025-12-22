@@ -18,6 +18,9 @@
                         <a href="#about" class="nav-link"><span data-hover="About">About</span></a>
                     </li>
                     <li class="nav-item">
+                        <a href="#experience" class="nav-link"><span data-hover="Experience">Experience</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#project" class="nav-link"><span data-hover="Projects">Projects</span></a>
                     </li>
                     <li class="nav-item">
