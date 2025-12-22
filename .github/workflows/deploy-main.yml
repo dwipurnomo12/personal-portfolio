@@ -45,7 +45,6 @@ jobs:
             sudo -u www /www/server/php/83/bin/php artisan migrate --force
             sudo -u www /www/server/php/83/bin/php artisan optimize:clear
 
-            sudo systemctl reload php8.3-fpm
             sudo systemctl reload nginx
 
             echo "=== DEPLOY DONE ==="
