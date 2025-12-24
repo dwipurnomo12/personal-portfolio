@@ -25,9 +25,15 @@ class GoogleAnalyticsService
 
     public function visitorsAndPageViews(int $days = 7)
     {
-        return $this->analytics->fetchVisitorsAndPageViews(
+        return $this->analytics->fetchTotalVisitorsAndPageViews(
             Period::days($days)
-        );
+        )->map(function (array $row): array {
+            return [
+                'date' => $row['date'] ?? null,
+                'visitors' => $row['activeUsers'] ?? 0,
+                'pageViews' => $row['screenPageViews'] ?? 0,
+            ];
+        });
     }
 
     public function byDevice(int $days = 30)
