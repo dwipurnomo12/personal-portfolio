@@ -18,5 +18,10 @@ class DatabaseSeeder extends Seeder
             'email'     => 'purnomodwi174@gmail.com',
             'password'  => bcrypt('password'),
         ]);
+
+        $this->call([
+            HomeSectionSeeder::class,
+            AboutSectionSeeder::class
+        ]);
     }
 }

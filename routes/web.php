@@ -39,7 +39,7 @@ Route::get('/debug-analytics', function () {
 });
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
